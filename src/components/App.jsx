@@ -11,12 +11,12 @@ function App() {
     setShowForm((showForm) => !showForm);
   }
 
+
   return (
     <>
       <Header />
       {showForm ? <ToyForm /> : null}
       <div className="buttonContainer">
-        <button onClick={handleClick}>Add a Toy</button>
       </div>
       <ToyContainer />
     </>
