@@ -1,17 +1,31 @@
-import React from "react";
+function ToyCard({ toy, onDeleteToy }) {
+const {id, name, image, likes} = toy;
 
-function ToyCard() {
+const handleDelete = () => {
+  fetch(`http://localhost:3001/toys/${id}`, {
+    method: "DELETE"
+  })
+  .then(r => {
+          if (!r.ok) {throw new Error("failed to delete toy") }
+          console.log("Item deleted")
+          onDeleteToy(id)
+        })
+      .catch(error => console.log(error.message))
+  
+}
+
   return (
     <div className="card" data-testid="toy-card">
-      <h2>{"" /* Toy's Name */}</h2>
+
+      <h2>{toy.name}</h2>
       <img
-        src={"" /* Toy's Image */}
-        alt={"" /* Toy's Name */}
+        src={image}
+        alt={name}
         className="toy-avatar"
       />
-      <p>{"" /* Toy's Likes */} Likes </p>
+      <p>{likes} Likes </p>
       <button className="like-btn">Like {"<3"}</button>
-      <button className="del-btn">Donate to GoodWill</button>
+      <button className="del-btn" onClick={handleDelete}>Donate to GoodWill</button>
     </div>
   );
 }
