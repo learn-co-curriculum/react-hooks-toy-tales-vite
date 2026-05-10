@@ -1,13 +1,17 @@
 import React from "react";
 
-function Header() {
+function Header({showForm, setShowForm}) {
   return (
-    <div id="toy-header">
-      <img
-        src="https://fontmeme.com/permalink/180719/67429e6afec53d21d64643101c43f029.png"
-        alt="toy header"
-      />
-    </div>
+
+    <header className="app-header">
+      <h1>🧸 Andy's Toy Chest</h1>
+      <button
+        className="toggle-form-btn"
+        onClick={() => setShowForm((prev) => !prev)}
+      >
+        {showForm ? "✕ Close" : "Add a Toy"}
+      </button>
+    </header>
   );
 }
 
