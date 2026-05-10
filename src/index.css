@@ -100,3 +100,8 @@ button:hover {
   font-family: monospace;
   margin: 3px;
 }
+
+.status-message {
+  margin: 2rem;
+  text-align: center;
+}
