@@ -21,7 +21,7 @@ function App() {
   function handleClick() {
     setShowForm((showForm) => !showForm);
   }
-
+  const addToy = (toy) => setToys((prev) => [...prev, toy]);
   return (
     <>
       <Header />
@@ -30,6 +30,7 @@ function App() {
         <button onClick={handleClick}>Add a Toy</button>
       </div>
       <ToyContainer toys={toys} />
+      <ToyForm addToy={addToy} />
     </>
   );
 }
