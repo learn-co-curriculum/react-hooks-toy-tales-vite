@@ -22,6 +22,15 @@ function App() {
     setShowForm((showForm) => !showForm);
   }
   const addToy = (toy) => setToys((prev) => [...prev, toy]);
+  function deleteToy(id) {
+    fetch(`http://localhost:3001/toys/${id}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        setToys((prevToys) => prevToys.filter((toy) => toy.id !== id));
+      })
+      .catch((error) => console.log(error));
+  }
   return (
     <>
       <Header />
@@ -29,7 +38,7 @@ function App() {
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toys={toys} />
+      <ToyContainer toys={toys} deleteToy={deleteToy} />
       <ToyForm addToy={addToy} />
     </>
   );
