@@ -21,6 +21,13 @@ function App() {
   function addToy(newToy) {
     setToys((prevToys) => [newToy,...prevToys]);
   }
+  function updateToy(updatedToy) {
+  setToys((prevToys) =>
+    prevToys.map((toy) =>
+      toy.id === updatedToy.id ? updatedToy : toy
+    )
+  );
+}
 
 
   return (
@@ -30,7 +37,7 @@ function App() {
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toys={toys} />
+      <ToyContainer toys={toys} onUpdateToy={updateToy} />
     </>
   );
 }
