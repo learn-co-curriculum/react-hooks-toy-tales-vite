@@ -1,12 +1,14 @@
 import React from "react";
 
-function ToyCard({ toy, deleteToy }) {
+function ToyCard({ toy, deleteToy, updateToyLikes }) {
   return (
     <div className="card" data-testid="toy-card">
       <h2>{toy.name}</h2>
       <img src={toy.image} alt={toy.name} className="toy-avatar" />
       <p>{toy.likes} Likes </p>
-      <button className="like-btn">Like {"<3"}</button>
+      <button className="like-btn" onClick={() => updateToyLikes(toy.id, toy.likes)}>
+        Like {"<3"}
+      </button>
       <button className="del-btn" onClick={() => deleteToy(toy.id)}>
         Donate to GoodWill
       </button>

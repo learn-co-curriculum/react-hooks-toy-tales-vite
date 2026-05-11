@@ -10,12 +10,10 @@ function App() {
 
   useEffect(() => {
     fetch("http://localhost:3001/toys")
-      .then((r) => {
-        if (!r.ok) throw new Error("failed to get toys");
-        return r.json();
-      })
-      .then((data) => setToys(data))
-      .catch((e) => console.log(e.message));
+      .then((r) => r.json())
+      .then((data) => {
+        setToys(data.toys ?? data);
+      });
   }, []);
 
   function handleClick() {
@@ -31,15 +29,34 @@ function App() {
       })
       .catch((error) => console.log(error));
   }
+
+  function updateToyLikes(id, currentLikes) {
+    const updatedLikes = currentLikes + 1;
+
+    fetch(`http://localhost:3001/toys/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ likes: updatedLikes }),
+    })
+      .then((r) => r.json())
+      .then((updatedToy) => {
+        setToys((prevToys) => prevToys.map((toy) => (toy.id === id ? updatedToy : toy)));
+      })
+      .catch((error) => console.log(error));
+  }
   return (
     <>
       <Header />
-      {showForm ? <ToyForm /> : null}
+
       <div className="buttonContainer">
-        <button onClick={handleClick}>Add a Toy</button>
+        <button onClick={() => setShowForm((s) => !s)}>Add a Toy</button>
       </div>
-      <ToyContainer toys={toys} deleteToy={deleteToy} />
-      <ToyForm addToy={addToy} />
+
+      {showForm && <ToyForm addToy={addToy} />}
+
+      <ToyContainer toys={toys} deleteToy={deleteToy} updateToyLikes={updateToyLikes} />
     </>
   );
 }
