@@ -1,6 +1,6 @@
 import React from "react";
 
-function ToyCard({ toy, onUpdateToy }) {
+function ToyCard({ toy, onUpdateToy, onDeleteToy }) {
 
   const handleLike = () => {
     fetch(`http://localhost:3000/toys/${toy.id}`, {
@@ -18,15 +18,19 @@ function ToyCard({ toy, onUpdateToy }) {
       });
   };
 
+  const handleDelete = () => {
+    fetch(`http://localhost:3000/toys/${toy.id}`, {
+      method: "DELETE",
+    }).then(() => {
+      onDeleteToy(toy.id);
+    });
+  };
+
   return (
     <div className="card" data-testid="toy-card">
       <h2>{toy.name}</h2>
 
-      <img
-        src={toy.image}
-        alt={toy.name}
-        className="toy-avatar"
-      />
+      <img src={toy.image} alt={toy.name} className="toy-avatar" />
 
       <p>{toy.likes} Likes </p>
 
@@ -34,7 +38,7 @@ function ToyCard({ toy, onUpdateToy }) {
         Like {"<3"}
       </button>
 
-      <button className="del-btn">
+      <button onClick={handleDelete} className="del-btn">
         Donate to GoodWill
       </button>
     </div>
