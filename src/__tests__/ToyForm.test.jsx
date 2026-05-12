@@ -18,7 +18,7 @@ describe("ToyForm Submission", () => {
       target: { value: firstToy.image },
     });
 
-    fireEvent.click(getByText("Create New Toy"));
+    fireEvent.click(getByText("Add a Toy"));
 
     const newToy = await findByText(firstToy.name)
     expect(newToy).toBeInTheDocument();
