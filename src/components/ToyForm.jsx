@@ -21,9 +21,7 @@ function ToyForm({ toys, setToys }) {
       body: JSON.stringify(newToy),
     })
       .then((r) => r.json())
-      .then((addedToy) => {
-        setToys([...toys, addedToy]);
-      });
+      .then((toy) => setToys((prev) => [...prev, toy]));
 
     setName("");
     setImage("");

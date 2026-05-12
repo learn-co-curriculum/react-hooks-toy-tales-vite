@@ -1,6 +1,10 @@
 import ToyCard from "./ToyCard";
 
-function ToyContainer({ toys, setToys, onLikeToy, onDeleteToy }) {
+function ToyContainer({
+  toys,
+  onLikeToy,
+  onDeleteToy,
+}) {
   return (
     <div className="toy-container">
       {toys.map((toy) => (
