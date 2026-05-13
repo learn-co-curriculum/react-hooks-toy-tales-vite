@@ -1,17 +1,25 @@
 import React from "react";
 
-function ToyCard() {
+function ToyCard({ toy, deleteToy }) {
+  function handleDelete() {
+    fetch(`${toy,id}`, {
+      method: "DELETE",
+    })
+    .then(()=> {
+      dleteToy(toy.id)
+    });
+  }
   return (
     <div className="card" data-testid="toy-card">
-      <h2>{"" /* Toy's Name */}</h2>
+      <h2>{toy.name}</h2>
       <img
-        src={"" /* Toy's Image */}
-        alt={"" /* Toy's Name */}
+        src={toy.image}
+        alt={toy.name}
         className="toy-avatar"
       />
-      <p>{"" /* Toy's Likes */} Likes </p>
+      <p>{toy.likes} Likes </p>
       <button className="like-btn">Like {"<3"}</button>
-      <button className="del-btn">Donate to GoodWill</button>
+      <button className="del-btn" onClick={handleDelete}>Donate to GoodWill</button>
     </div>
   );
 }
