@@ -15,6 +15,10 @@ function App() {
     setToys([...toys, newToy]);
   }
 
+  function handleDeleteToy(id) {
+    setToys(toys.filter((toy) => toy.id !== id));
+  }
+
   return (
     <main>
       <h1>Toy Tales</h1>
@@ -23,7 +27,11 @@ function App() {
 
       <div id="toy-collection">
         {toys.map((toy) => (
-          <ToyCard key={toy.id} toy={toy} />
+          <ToyCard
+            key={toy.id}
+            toy={toy}
+            onDeleteToy={handleDeleteToy}
+          />
         ))}
       </div>
     </main>
