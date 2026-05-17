@@ -19,6 +19,14 @@ function App() {
     setToys(toys.filter((toy) => toy.id !== id));
   }
 
+  function handleUpdateToy(updatedToy) {
+    setToys(
+      toys.map((toy) =>
+        toy.id === updatedToy.id ? updatedToy : toy
+      )
+    );
+  }
+
   return (
     <main>
       <h1>Toy Tales</h1>
@@ -31,6 +39,7 @@ function App() {
             key={toy.id}
             toy={toy}
             onDeleteToy={handleDeleteToy}
+            onUpdateToy={handleUpdateToy}
           />
         ))}
       </div>
