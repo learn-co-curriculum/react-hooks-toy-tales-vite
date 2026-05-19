@@ -11,7 +11,7 @@ function ToyCard() {
       />
       <p>{"" /* Toy's Likes */} Likes </p>
       <button className="like-btn">Like {"<3"}</button>
-      <button className="del-btn">Donate to GoodWill</button>
+      <button className="del-btn">Donate a toy</button>
     </div>
   );
 }
