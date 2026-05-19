@@ -4,7 +4,7 @@ function ToyForm() {
   return (
     <div className="container">
       <form className="add-toy-form">
-        <h3>Create a toy!</h3>
+        <h3>Create a toy!!</h3>
         <input
           type="text"
           name="name"
