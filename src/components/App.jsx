@@ -9,7 +9,7 @@ function App() {
   const [toys, setToys] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/toys")
+    fetch("http://localhost:3001/toys")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Failed to fetch toys: ${response.status}`);
@@ -47,6 +47,34 @@ function App() {
       });
   }
 
+  function handleLikeToy(toyId, currentLikes) {
+    const updatedLikes = currentLikes + 1;
+
+    fetch(`http://localhost:3000/toys/${toyId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ likes: updatedLikes }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to update likes: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((updatedToy) => {
+        setToys((currentToys) =>
+          currentToys.map((toy) =>
+            toy.id === toyId ? updatedToy : toy
+          )
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   return (
     <>
       <Header />
@@ -54,7 +82,11 @@ function App() {
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toys={toys} onDeleteToy={handleDeleteToy} />
+      <ToyContainer
+        toys={toys}
+        onDeleteToy={handleDeleteToy}
+        onLikeToy={handleLikeToy}
+      />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-function ToyCard({ toy, onDeleteToy }) {
+function ToyCard({ toy, onDeleteToy, onLikeToy }) {
   const { name, image, likes } = toy;
 
   return (
@@ -8,7 +8,12 @@ function ToyCard({ toy, onDeleteToy }) {
       <h2>{name}</h2>
       <img src={image} alt={name} className="toy-avatar" />
       <p>{likes} Likes </p>
-      <button className="like-btn">Like {"<3"}</button>
+      <button
+        className="like-btn"
+        onClick={() => onLikeToy(toy.id, likes)}
+      >
+        Like {"<3"}
+      </button>
       <button
         className="del-btn"
         onClick={() => onDeleteToy(toy.id)}
