@@ -1,44 +1,162 @@
-# Practice Challenge: Toy Tales
+# Toy Tales - React Hooks Practice Application
 
-You've got a friend in need! Again!
+A React application for managing Andy's toy collection. Users can view all toys, add new toys, like toys, and donate toys to GoodWill.
 
-Andy has misplaced of his toys (again) and need your help to organize them.
+## Features
 
-## Setup
+- ✅ **Display All Toys**: View all toys on page load with their details (name, image, likes count)
+- ✅ **Add a Toy**: Submit a form to create a new toy with initial likes set to 0
+- ✅ **Like a Toy**: Click the like button to increase a toy's likes count
+- ✅ **Donate a Toy**: Click the donate button to remove a toy from the collection
 
-All the information about Andy's toys can be found in the `db.json` file. We'll
-be using `json-server` to create a RESTful API for our database.
+## Setup and Running the Application
 
-Run `npm install` to install our dependencies.
+All toy data is stored in the `db.json` file. The application uses `json-server` to create a RESTful API.
 
-Then, run `npm run server` to start up `json-server` on `http://localhost:3001`.
+### Installation
+```bash
+npm install
+```
 
-In another tab, run `npm run dev` to start up our React app at `http://localhost:3000`.
+### Running the Application
 
-In another tab, run `npm run test` to run the test suite.
+Open three separate terminals and run these commands:
 
-Before you start building out the application, the first step that you should
-take is to examint the current code and component hierarchy. This will tell you 
-how components can pass data to each other as well as where that information should 
-be stored.
+**Terminal 1: Start the backend server (port 3001)**
+```bash
+npm run server
+```
+
+**Terminal 2: Start the React development server (port 3000)**
+```bash
+npm run dev
+```
+
+**Terminal 3: Run the test suite**
+```bash
+npm run test
+```
+
+The application will be available at `http://localhost:3000`
+
+## Architecture and Component Structure
+
+### Component Hierarchy
+
+```
+App (Root Component)
+├── Header (Presentational)
+├── ToyForm (Form for creating toys)
+└── ToyContainer
+    └── ToyCard (Individual toy cards)
+```
+
+### State and Props
+
+#### App Component
+**State:**
+- `showForm` (boolean): Controls visibility of the ToyForm
+- `toys` (array): Array of all toy objects from the backend
+
+**Responsibilities:**
+- Fetches toys from backend on component mount using `useEffect`
+- Manages form visibility toggle
+- Handles toy creation, deletion, and like updates
+- Passes state and handlers to child components via props
+
+**Event Listeners:**
+- `handleClick`: Toggles the form visibility
+- `handleAddToy`: Adds a new toy to state after form submission
+- `handleDeleteToy`: Removes a toy from state after deletion
+- `handleLikeToy`: Updates a toy's likes in state after like button click
+
+**useEffect:**
+- Empty dependency array `[]` - Runs once on component mount to fetch toys from `/toys` endpoint
+
+#### ToyContainer Component
+**Props:**
+- `toys` (array): Array of toy objects to display
+- `onDeleteToy` (function): Callback for toy deletion
+- `onLikeToy` (function): Callback for updating likes
+
+**Responsibilities:**
+- Maps through toys array and renders individual ToyCard components
+- Passes toy data and callback functions to each ToyCard
+
+#### ToyCard Component
+**Props:**
+- `toy` (object): Single toy object with properties: `id`, `name`, `image`, `likes`
+- `onDeleteToy` (function): Callback to remove toy from parent state
+- `onLikeToy` (function): Callback to update toy likes in parent state
+
+**Responsibilities:**
+- Displays toy information (name, image, likes count)
+- Handles like button click with PATCH request to `/toys/:id`
+- Handles donate button click with DELETE request to `/toys/:id`
+- Calls appropriate callback functions to update parent state
+
+**Event Listeners:**
+- `handleLike`: Makes PATCH request and calls `onLikeToy` callback
+- `handleDelete`: Makes DELETE request and calls `onDeleteToy` callback
+
+#### ToyForm Component
+**Props:**
+- `onAddToy` (function): Callback to add new toy to parent state
+
+**State:**
+- `formData` (object): Form input values with properties: `name`, `image`
+
+**Responsibilities:**
+- Manages controlled form inputs
+- Handles form submission with POST request to `/toys` endpoint
+- Sets initial likes to 0 for new toys
+- Clears form after successful submission
+
+**Event Listeners:**
+- `handleChange`: Updates formData state as user types
+- `handleSubmit`: Validates form, creates new toy, makes POST request
+
+#### Header Component
+**Responsibilities:**
+- Displays the Toy Tales header image (presentational only, no state or logic)
+
+## API Endpoints
+
+- `GET /toys` - Fetch all toys
+- `POST /toys` - Create a new toy
+- `PATCH /toys/:id` - Update a toy (used for updating likes)
+- `DELETE /toys/:id` - Delete a toy
+
+## Testing
+
+The test suite includes comprehensive tests for all features:
+
+```bash
+npm run test
+```
+
+**Test Files:**
+- `AllToys.test.jsx`: Tests that all toys are displayed on page load
+- `ToyForm.test.jsx`: Tests that new toys can be created and displayed
+- `Donate.test.jsx`: Tests that toys can be deleted
+- `Like.test.jsx`: Tests that likes can be increased
+
+All tests are passing ✅
 
 ## Deliverables
 
-- _When our application loads_, make a GET request to `/toys` to fetch the toy
-  array. Given your component tree, think about which component should be
-  responsible for the array. After you have put the data in the proper
-  component, your next job is to render the `ToyCard` components on the page.
+- ✅ When the application loads, fetch toys from `/toys` and render them using ToyCard components
+- ✅ When the ToyForm is submitted, make a POST request to `/toys` to create a new toy with initial likes set to 0
+- ✅ When the "Donate to GoodWill" button is clicked, make a DELETE request to `/toys/:id` to delete the toy
+- ✅ When the like button is clicked, make a PATCH request to `/toys/:id` with the updated likes count
+- ✅ Add comments and documentation explaining component purpose and logic
+- ✅ All tests passing successfully
 
-- _When the `ToyForm` is submitted_, make a POST request to `/toys` to save a
-  new toy to the server. Using the ideas of controlled form and inverse data
-  flow, think about how to render a new `ToyCard` for the toy that you created.
+## Development Notes
 
-- _When the `Donate to Goodwill` button is clicked_, make a DELETE request to
-  `/toys/:id` with the ID of the toy that was clicked to delete the toy from the
-  server. The `ToyCard` that you clicked on should also be removed from the DOM.
+- The application uses React Hooks (`useState`, `useEffect`) for state management
+- Event handlers and `useEffect` hooks are implemented at the component level where they're needed
+- State is lifted to the App component to manage the main toys array
+- Controlled forms are used for the ToyForm component
+- The application follows React best practices for prop drilling and component composition
 
-- _When the like button is clicked_, make a PATCH request to `/toys/:id` with
-  the id of the toy that was clicked, along with the new number of likes (this
-  should be sent in the body of the PATCH request, as a object:
-  `{ likes: 10 }`), to update the toy on the server. Clicking on the button
-  should also increase the number of likes on the DOM.
