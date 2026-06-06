@@ -1,17 +1,20 @@
 import React from "react";
 
-function ToyCard() {
+/**
+ * Displays an individual toy and its actions.
+ */
+function ToyCard({ id, name, image, likes, deleteToy, updateLikes }) {
   return (
     <div className="card" data-testid="toy-card">
-      <h2>{"" /* Toy's Name */}</h2>
+     <h2>{name}</h2>
       <img
-        src={"" /* Toy's Image */}
-        alt={"" /* Toy's Name */}
+        src={image}
+        alt={name}
         className="toy-avatar"
       />
-      <p>{"" /* Toy's Likes */} Likes </p>
-      <button className="like-btn">Like {"<3"}</button>
-      <button className="del-btn">Donate to GoodWill</button>
+      <p>{likes} Likes </p>
+      <button className="like-btn" onClick={() => (updateLikes(id, likes + 1))}>Like {"<3"}</button>
+      <button className="del-btn" onClick={() => (deleteToy(id))}>Donate to GoodWill</button>
     </div>
   );
 }
