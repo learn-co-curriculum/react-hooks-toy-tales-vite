@@ -1,6 +1,9 @@
 import React from "react";
 
-function ToyCard() {
+function ToyCard( {toy, onDeleteToy, onUpdateToy}) {
+  function handleDelete() {
+    fetch("http://localhost:3001/toys/${toy.id"})
+  }
   return (
     <div className="card" data-testid="toy-card">
       <h2>{"" /* Toy's Name */}</h2>
