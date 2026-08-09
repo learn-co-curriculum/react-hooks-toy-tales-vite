@@ -1,9 +1,20 @@
 import React from "react";
 import ToyCard from "./ToyCard";
 
-function ToyContainer() {
+// Receives the full toy list from App and passes each individual
+// toy (plus the shared callbacks) down to a ToyCard
+function ToyContainer({ toys, onDeleteToy, onUpdateToy }) {
   return (
-    <div id="toy-collection">{/* Render the collection of ToyCards */}</div>
+    <div id="toy-collection">
+      {toys.map((toy) => (
+        <ToyCard
+          key={toy.id}
+          toy={toy}
+          onDeleteToy={onDeleteToy}
+          onUpdateToy={onUpdateToy}
+        />
+      ))}
+    </div>
   );
 }
 
