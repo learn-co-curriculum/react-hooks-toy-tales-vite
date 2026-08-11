@@ -19,14 +19,19 @@ function App() {
     setShowForm((showForm) => !showForm);
   }
 
+  function handleAddNewToy(newToy) {
+    // Inverse data flow: ToyForm calls this after a successful POST
+    setToys((toys) => [...toys, newToy]);
+  }
+
   return (
     <>
       <Header />
-      {showForm ? <ToyForm /> : null}
+      {showForm ? <ToyForm onAddNewToy={handleAddNewToy} /> : null}
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toys={toys} /> {/* pass toys down as a prop */}
+      <ToyContainer toys={toys} />
     </>
   );
 }
