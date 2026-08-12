@@ -8,7 +8,7 @@ function App() {
   const [toys, setToys] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:6001/toys")
+    fetch("http://localhost:3001/toys")
       .then((res) => res.json())
       .then((data) => setToys(data));
   }, []);
@@ -22,7 +22,7 @@ function App() {
   }
 
   function handleDeleteToy(idToDelete) {
-    fetch(`http://localhost:6001/toys/${idToDelete}`, {
+    fetch(`http://localhost:3001/toys/${idToDelete}`, {
       method: "DELETE",
     }).then((res) => {
       if (res.ok) {
@@ -34,7 +34,7 @@ function App() {
   function handleLikeToy(toyToLike) {
     const updatedLikes = toyToLike.likes + 1;
 
-    fetch(`http://localhost:6001/toys/${toyToLike.id}`, {
+    fetch(`http://localhost:3001/toys/${toyToLike.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ likes: updatedLikes }),
