@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function ToyForm() {
+function ToyForm({setToys}) {
   const [formData, setFormData] = useState({
     name: "",
     image: "",
@@ -16,7 +16,7 @@ function ToyForm() {
     })
     .then(res => res.json())
     .then(newToy => {
-      console.log("Toy created:", newToy);
+      setToys((prevToys) => [...prevToys, newToy]);
       // setFormData({
       //     name: "",
       //     image: "",

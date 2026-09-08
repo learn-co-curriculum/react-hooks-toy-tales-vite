@@ -12,7 +12,7 @@ function ToyCard({toy, handleDelete, handleLike}) {
         className="toy-avatar"
       />
       <p>{toy.likes} Likes </p>
-      <button className="like-btn" onClick={() => handleLike(toy.id)}>Like {toy.likes}</button>
+      <button className="like-btn" onClick={() => handleLike(toy.id)}>Like {"<3"}</button>
       <button className="del-btn" onClick={() => handleDelete(toy.id)}>Donate to GoodWill</button>
     </div>
   );
