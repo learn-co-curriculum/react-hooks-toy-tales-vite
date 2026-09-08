@@ -10,10 +10,21 @@ function ToyContainer() {
     .then(res => res.json())
     .then(data => SetToys(data))
   },[])
+
+  function handleDelete(id) {
+    fetch(`http://localhost:3001/toys/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then(() => {
+        console.log("Toy deleted");
+      })
+      .catch((error) => console.error("Error deleting toy:", error));
+  }
   return (
     <div id="toy-collection">
       {toys.map((toy)=>(
-        <ToyCard toy={toy}/>
+        <ToyCard toy={toy} handleDelete={handleDelete}/>
       ))}
     </div>
   );
