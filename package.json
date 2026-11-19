@@ -23,14 +23,14 @@
     "jsdom": "^26.0.0",
     "node-fetch": "^3.3.2",
     "vite": "^6.1.0",
-    "vitest": "^3.0.5"
+    "vitest": "^3.2.7"
   },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "json-server db.json -p 3001",
+    "server": "json-server db.json -p 3002",
     "test": "vitest"
   },
   "eslintConfig": {
