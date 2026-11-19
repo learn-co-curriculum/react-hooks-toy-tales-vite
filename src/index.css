@@ -1,11 +1,17 @@
+
+/* General Page Styling */
 body {
   margin: 0;
   font-family: monospace;
+  background-color: #f7f7f9;
+  color: #333;
 }
 
+/*Header */
 #toy-header {
   display: flex;
   justify-content: center;
+  align-items: center;
   background: #515da2;
   opacity: 0.8;
   height: 7rem;
@@ -13,90 +19,214 @@ body {
 }
 
 #toy-header img {
-  height: 6rem;
-  width: auto;
+   height: 6rem;
+   width: auto;
 }
 
+/* Toy Collection */
 #toy-collection {
-  margin: 2rem;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 1.5rem;
+   margin: 2rem;
 }
 
+/* Toy Cards */
 .card {
-  text-align: center;
-  border: grey solid 1px;
-  padding: 1rem;
-  width: 15rem;
-  height: 25rem;
-  display: inline-grid;
-  margin: 1rem 2rem;
-  box-shadow: 3px 4px #e04b52;
+   box-sizing: border-box;
+   text-align: center;
+   background: #fff;
+   border: 1px solid #dedfe4;
+   border-radius: 14px; 
+   padding: 1.2rem;
+   width: 15rem;
+   min-height: 25rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-between;
+   gap: 0.8rem;
+   margin: 0.5rem;
+   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+   transition: transform 0.2s ease, box-shadow 0.2s ease
 }
 
+.card:hover {
+   transform: translateY(-4px);
+   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.card h2 {
+   color: #515da2;
+   font-size: 1.3rem;
+
+}
+
+.card p {
+    color: #555;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* Toy Images */
 .toy-avatar {
   justify-self: center;
   height: 12rem;
+  max-width: 100%;
   width: auto;
+  object-fit: contain;
 }
 
+/* General Button Styling  */
 button {
-  position: relative;
-  background-color: #e04b52;
-  border: none;
-  border-radius: 5px;
-  height: 3rem;
-  width: max-content;
-  color: whitesmoke;
-  font-size: 18px;
-  justify-self: center;
+   position: relative;
+   border: none;
+   border-radius: 7px;
+   min-height: 2.8rem;
+   width: max-content;
+   color: whitesmoke;
+   font-size: 16px; 
+   justify-self: center;
+   cursor: pointer;
+   transition: all 0.2s ease;
 }
 
+/* Like Button */
+.like-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: pink;
+    width: 100%;
+}
+
+.like-btn:hover {
+    background-color: white;
+    border: 1px solid #e04b52;
+    color: grey;
+}
+
+/* Lucide Heart Icon*/
+.like-btn svg {
+   width: 20px;
+   height: 20px;
+   stroke-width: 2;
+   color: white;
+   flex-shrink: 0;
+}
+
+.like-btn:hover svg {
+   color: grey;
+}
+
+/* Donate Button */
+.del-btn {
+   background-color: #515da2;
+   width: 100%;
+}
+
+.del-btn:hover {
+   background-color: white;
+   border: 1px solid #515da2;
+   color:#515da2
+}
+
+/* Add a Toy Button */
 .buttonContainer {
-  text-align: center;
-  padding: 1rem;
+   text-align: center;
+   padding: 1rem;
 }
 
-button:hover {
-  background-color: whitesmoke;
-  border: #e04b52 solid 1px;
-  color: #e04b52;
+.buttonContainer button {
+  background-color: #e09397;
+  padding: 0.5rem 1.2rem;
 }
 
+.buttonContainer button:hover {
+  background-color: #515da2;
+  border: 1px solid #515da2;
+  color: white;
+}
+
+/* TOY CREATION FORM */
 .container {
-  padding: 1rem;
-  width: stretch;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  width: 80%;
+  max-width: 700px;
   height: auto;
+  margin: 1rem auto;
   background: #515da2;
   opacity: 0.8;
+  border-radius: 12px;
 }
 
 .add-toy-form {
-  width: 80%;
+  width: 100%;
+  text-align: center;
 }
 
+.add-toy-form h3 {
+  color: white;
+  font-size: 1.4rem;
+}
+
+/* FORM INPUTS */
+.input-text {
+  box-sizing: border-box;
+  border-radius: 7px;
+  height: 2.5rem;
+  width: 90%;
+  max-width: 500px;
+  font-size: 16px;
+  font-family: monospace;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #96df03;
+}
+
+.input-text:focus {
+  outline: 2px solid #9592bd;
+  border-color: #afec06;
+}
+
+/* FORM SUBMIT BUTTON */
 .submit {
   position: relative;
-  background-color: #e04b52;
-  border-radius: 5px;
-  height: 2rem;
+  background-color: greenyellow;
+  border-radius: 7px;
+  height: 2.5rem;
   width: max-content;
   color: whitesmoke;
-  font-size: 18px;
+  font-size: 16px;
   justify-self: center;
   font-family: monospace;
-  margin: 3px;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
 }
 
 .submit:hover {
-  background-color: whitesmoke;
-  border: #e04b52 solid 1px;
-  color: #e04b52;
+  background-color: white;
+  border: 1px solid grey;
+  color: grey;
 }
 
-.input-text {
-  border-radius: 5px;
-  height: 2rem;
-  width: 60%;
-  font-size: 18px;
-  font-family: monospace;
-  margin: 3px;
+/* RESPONSIVE DESIGN */
+@media (max-width: 600px) {
+  #toy-collection {
+    margin: 1rem;
+    gap: 0.8rem;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 18rem;
+  }
+
+  .container {
+    width: 94%;
+  }
 }
