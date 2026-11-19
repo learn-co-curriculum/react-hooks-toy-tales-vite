@@ -6,12 +6,13 @@ import ToyContainer from "./ToyContainer";
 
 function App() {
   const [showForm, setShowForm] = useState(false);
- const[toys, setToys] = useState([])
-   useEffect(
-    ()=>{fetch("http://localhost:3001/toys")
-      .then((res)=>res.json())
-      .then((result)=> setToys(result))
-    },[]);
+  const [toys, setToys] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/toys")
+      .then((response) => response.json())
+      .then((result) => setToys(result));
+  }, []);
 
   function handleClick() {
     setShowForm((showForm) => !showForm);
@@ -24,7 +25,7 @@ function App() {
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toys ={toys}/>
+      <ToyContainer toys={toys} />
     </>
   );
 }
